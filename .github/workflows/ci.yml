@@ -32,7 +32,7 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: build-artifacts
-        path: build/bin/
+        path: build/  
         
   test:
     needs: build
@@ -46,7 +46,7 @@ jobs:
       uses: actions/download-artifact@v3
       with:
         name: build-artifacts
-        path: build/bin/
+        path: build/
     
     - name: Run tests
       run: ctest --test-dir build/
@@ -63,39 +63,19 @@ jobs:
       uses: actions/download-artifact@v3
       with:
         name: build-artifacts
-        path: build/bin/
+        path: build/
     
     - name: Extract commit hash
       id: extract_hash
       run: echo "COMMIT_HASH=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
 
     - name: Create Release
-      id: create_release
-      uses: actions/create-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.MAI_OOP_RELEASE_TOKEN }}
+      uses: softprops/action-gh-release@v1
       with:
         tag_name: ${{ env.COMMIT_HASH }}
-        release_name: Release ${{ env.COMMIT_HASH }}
+        name: Release ${{ env.COMMIT_HASH }}
         draft: false
         prerelease: false
-    
-    - name: Upload lab_01_exe
-      uses: actions/upload-release-asset@v1
+        files: build/bin/*
       env:
         GITHUB_TOKEN: ${{ secrets.MAI_OOP_RELEASE_TOKEN }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: build/bin/lab_01_exe
-        asset_name: lab_01_exe
-        asset_content_type: application/octet-stream
-
-    - name: Upload lab_02_exe
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.MAI_OOP_RELEASE_TOKEN }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: build/bin/lab_02_exe
-        asset_name: lab_02_exe
-        asset_content_type: application/octet-stream
