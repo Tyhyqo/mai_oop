@@ -30,6 +30,13 @@ jobs:
 
     - name: Run tests
       run: ctest --test-dir build/
+
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: build-artifacts
+        path: build/bin/
+
   release:
     needs: build
     runs-on: ubuntu-latest
@@ -37,6 +44,16 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
+    
+    - name: Download build artifacts
+      uses: actions/download-artifact@v2
+      with:
+        name: build-artifacts
+        path: build/bin/
+    
+    - name: Extract commit hash
+      id: extract_hash
+      run: echo "COMMIT_HASH=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
 
     - name: Create Release
       id: create_release
@@ -44,8 +61,8 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.MAI_OOP_RELEASE_TOKEN }}
       with:
-        tag_name: ${{ github.ref_name }}
-        release_name: Release ${{ github.ref_name }}
+        tag_name: ${{ env.COMMIT_HASH }}
+        release_name: Release ${{ env.COMMIT_HASH }}
         draft: false
         prerelease: false
     
