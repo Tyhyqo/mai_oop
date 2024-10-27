@@ -1,5 +1,5 @@
 #include <iostream>
-#include "include/thirteen.h"
+#include "thirteen.h"
 
 int main()
 {

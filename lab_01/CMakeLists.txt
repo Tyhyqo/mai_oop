@@ -9,6 +9,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # Добавляем библиотеку
 add_library(${PROJECT_NAME}_lib src/closet_pair_tonum.cpp)
 
+include_directories(${PROJECT_SOURCE_DIR}/include)
+
 # Добавляем исполняемый файл
 add_executable(${PROJECT_NAME}_exe main.cpp)
 target_link_libraries(${PROJECT_NAME}_exe PRIVATE ${PROJECT_NAME}_lib)

@@ -1,4 +1,4 @@
-#include "../include/closed_pair_tonum.h"
+#include "closed_pair_tonum.h"
 
 std::vector<int> closestPairTonum(const int upperLimit) {
     std::vector<int> res;

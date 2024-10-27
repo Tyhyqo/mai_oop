@@ -1,5 +1,5 @@
 #include <iostream>
-#include "include/closed_pair_tonum.h"
+#include "closed_pair_tonum.h"
 
 int main() {
     std::cout << "Input upper limit: ";

@@ -1,4 +1,4 @@
-#include "../include/thirteen.h"
+#include "thirteen.h"
 #include <vector>
 
 // Default constructor
