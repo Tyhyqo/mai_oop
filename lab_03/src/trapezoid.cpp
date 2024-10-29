@@ -43,32 +43,22 @@ Trapezoid::operator double() const
     return area();
 }
 
-std::pair<double, double> Trapezoid::center() const
-{
-    double area = 0.0;
+std::pair<double, double> Trapezoid::center() const {
     double centerX = 0.0;
     double centerY = 0.0;
 
-    for (size_t i = 0; i < points_.size(); ++i)
+    for (const auto &point : points_)
     {
-        size_t j = (i + 1) % points_.size();
-        double xi = points_[i].first;
-        double yi = points_[i].second;
-        double xj = points_[j].first;
-        double yj = points_[j].second;
-
-        double cross = xi * yj - xj * yi;
-        area += cross;
-        centerX += (xi + xj) * cross;
-        centerY += (yi + yj) * cross;
+        centerX += point.first;
+        centerY += point.second;
     }
 
-    area *= 0.5;
-    centerX /= (6.0 * area);
-    centerY /= (6.0 * area);
+    centerX /= points_.size();
+    centerY /= points_.size();
 
     return {centerX, centerY};
 }
+
 
 void Trapezoid::print(std::ostream &os) const
 {

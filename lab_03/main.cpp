@@ -24,6 +24,7 @@ int main()
         std::cout << "8) Exit" << std::endl;
 
         std::cin >> command;
+        std::cout << "------------------------------------------------" << std::endl;
         if (command == "1")
         {
             std::cout << "Select firgure: " << std::endl;
@@ -33,13 +34,14 @@ int main()
 
             std::string figure;
             std::cin >> figure;
+            std::cout << "------------------------------------------------" << std::endl;
             if (figure == "1")
             {
                 try
                 {
-                    Rhomb rhomb;
-                    std::cin >> rhomb;
-                    figures.push_back(rhomb);
+                    Rhomb *rhomb = new Rhomb();
+                    std::cin >> *rhomb;
+                    figures.push_back(*rhomb);
                 }
                 catch (const std::invalid_argument &e)
                 {
@@ -50,9 +52,9 @@ int main()
             {
                 try
                 {
-                    Rectangle rectangle;
-                    std::cin >> rectangle;
-                    figures.push_back(rectangle);
+                    Rectangle *rectangle = new Rectangle();
+                    std::cin >> *rectangle;
+                    figures.push_back(*rectangle);
                 }
                 catch (const std::invalid_argument &e)
                 {
@@ -63,9 +65,9 @@ int main()
             {
                 try
                 {
-                    Trapezoid trapezoid;
-                    std::cin >> trapezoid;
-                    figures.push_back(trapezoid);
+                    Trapezoid *trapezoid = new Trapezoid();
+                    std::cin >> *trapezoid;
+                    figures.push_back(*trapezoid);
                 }
                 catch (const std::invalid_argument &e)
                 {
@@ -91,6 +93,7 @@ int main()
 
             std::size_t index;
             std::cin >> index;
+            std::cout << "------------------------------------------------" << std::endl;
             try
             {
                 std::cout << "Figure area: " << static_cast<double>(figures[index]) << std::endl;
@@ -103,31 +106,32 @@ int main()
         else if (command == "5")
         {
             std::cout << "Enter index: " << std::endl;
-            
+
             std::size_t index;
             std::cin >> index;
+            std::cout << "------------------------------------------------" << std::endl;
             try
             {
                 std::cout << figures[index];
             }
-            catch(const std::out_of_range& e)
+            catch (const std::out_of_range &e)
             {
                 std::cerr << e.what() << std::endl;
             }
-            
         }
         else if (command == "6")
         {
             std::cout << "Enter index: " << std::endl;
-            
+
             std::size_t index;
             std::cin >> index;
+            std::cout << "------------------------------------------------" << std::endl;
             try
             {
-                std::pair<double, double> center = figures[index].center();
+                auto center = figures[index].center();
                 std::cout << "Geometric center: (" << center.first << ", " << center.second << ")" << std::endl;
             }
-            catch(const std::out_of_range& e)
+            catch (const std::out_of_range &e)
             {
                 std::cerr << e.what() << std::endl;
             }
@@ -135,14 +139,16 @@ int main()
         else if (command == "7")
         {
             std::cout << "Enter index: " << std::endl;
-            
+
             std::size_t index;
             std::cin >> index;
+            std::cout << "------------------------------------------------" << std::endl;
             try
             {
                 figures.erase(index);
+                std::cout << "Figure deleted" << std::endl;
             }
-            catch(const std::out_of_range& e)
+            catch (const std::out_of_range &e)
             {
                 std::cerr << e.what() << std::endl;
             }
@@ -155,6 +161,7 @@ int main()
         {
             std::cout << "Invalid command" << std::endl;
         }
+        std::cout << "------------------------------------------------" << std::endl;
     }
 
     return 0;

@@ -26,3 +26,14 @@ target_link_libraries(${PROJECT_NAME}_exe PRIVATE ${PROJECT_NAME}_lib)
 set_target_properties(${PROJECT_NAME}_exe PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
+# Добавляем Google Tests
+enable_testing()
+add_executable(tests_lab_03 test/tests03.cpp)
+target_link_libraries(tests_lab_03 ${PROJECT_NAME}_lib gtest gmock)
+add_test(NAME Lab03Tests COMMAND tests_lab_03)
+
+
+# Для тестов
+set_target_properties(tests_lab_03 PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/tests)
+
