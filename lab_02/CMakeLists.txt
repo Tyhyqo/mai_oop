@@ -21,7 +21,8 @@ set_target_properties(${PROJECT_NAME}_exe PROPERTIES
 enable_testing()
 add_executable(tests_lab_02 test/tests02.cpp)
 target_link_libraries(tests_lab_02 ${PROJECT_NAME}_lib gtest gmock)
-add_test(NAME Lab02Tests COMMAND tests02)
+add_test(NAME Lab02Tests COMMAND ${CMAKE_BINARY_DIR}/tests/tests_lab_02)
+
 
 # Для тестов
 set_target_properties(tests_lab_02 PROPERTIES
