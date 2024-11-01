@@ -48,6 +48,9 @@ jobs:
         name: build-artifacts
         path: build/
     
+    - name: Set execute permissions for test binaries
+      run: chmod +x build/tests/*
+    
     - name: Run tests
       run: ctest --test-dir build/
     
