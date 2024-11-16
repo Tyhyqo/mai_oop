@@ -63,9 +63,9 @@ TEST(FigureVectorTest, OperatorAccess)
     figures.push_back(rhomb);
     figures.push_back(trapezoid);
 
-    EXPECT_EQ(&figures[0], rect);
-    EXPECT_EQ(&figures[1], rhomb);
-    EXPECT_EQ(&figures[2], trapezoid);
+    EXPECT_EQ(figures[0], rect);
+    EXPECT_EQ(figures[1], rhomb);
+    EXPECT_EQ(figures[2], trapezoid);
 }
 
 // Test the operator double() conversion of FigureVector
@@ -131,7 +131,7 @@ TEST(FigureVectorTest, EraseMethod)
     figures.erase(1);
 
     EXPECT_EQ(figures.size(), 2);
-    EXPECT_EQ(&figures[1], trapezoid);
+    EXPECT_EQ(figures[1], trapezoid);
 }
 
 // Test the center method of Rectangle
